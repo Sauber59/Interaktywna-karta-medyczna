@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <title>Login - Medical Card</title>
+  <h1>Login - Medical Card</h1>
+  <script type="text/javascript">
+    function valid (form){
+      var fail = false;
+      var name = form.name.value;
+      var password = form.password.value;
+      var repassword = form.repassword.value;
+      var email = form.email.value;
+      if (name == "" || name == " "){
+        fail = "Enter your name please";
+      }
+      else if (password == ""){
+        fail = "Enter your password please";
+      }
+      else if (repassword == ""){
+        fail = "Confirm your password please";
+      }
+      else if (email == ""){
+        fail = "Enter your e-mail please";
+      }
+      else if (repassword != password){
+        fail = "Passwords are not the same, please try again";
+      }
+      
+      if (fail)
+        alert(fail);
+      else 
+        window.location = "http://e-medicard.com"
+    }
+    function openbox (id) {
+        display = document.getElementById(id).style.display;
+        if (display == 'none'){
+            document.getElementById(id).style.display='block';
+        } else {
+            document.getElementById(id).style.display='none';
+            }
+    }
+
+  </script>
+  
+</head>
+<body>
+  <div class="login">
+    <div class="form">
+      <form class="reg-form" method="POST" name="reg-form" id="reg-form">
+      <input type="text" name="name" placeholder="Name" id="name" />
+      <input type="password" name="password" placeholder="Password" id="password" />
+      <input type="password" name="repassword" placeholder="Repeat your password" id="repassword" />
+      <input type="email" name="email" placeholder="E-mail" id="email" />
+      <select>
+        <option name="state" id="male" value="Male">Male</option>
+        <option name="state" id="female" value="Male">Female</option>
+      </select>
+      <input class="button" type="button" onclick="valid(document.getElementById('reg-form'))" name="submit" value="Register"/>
+      <p class="message">Already Registered? <a href="#" onclick="openbox('login-form'); return false; closebox('reg-form'); return false">Login</a></p>
+      </form>
+      <form class="login-form" name="login-form"  id="login-form">
+        <input type="email" placeholder="E-mail">
+        <input type="password" placeholder="Password">
+        <input class="button" type="button" onclick="login(document.getElementById('login-form'))" name="submit" value="Login"/>
+        <p class="message">Not Registered? <a href="#">Register</a></p>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
