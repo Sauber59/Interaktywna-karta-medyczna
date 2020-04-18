@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <link rel="stylesheet" type="text/css" href="css/login.css">
   <title>Login - Medical Card</title>
   <h1>Login - Medical Card</h1>
@@ -53,14 +54,17 @@
       
     }
 
-    function openbox (id) {
-        display = document.getElementById(id).style.display;
-        if (display == 'none'){
-            document.getElementById(id).style.display='block';
-        } else {
-            document.getElementById(id).style.display='none';
-            }
-    }
+      $(document).ready(function(){
+        $("#reg_toggle").click(function(){
+          $("#login-form, #reg-form").slideToggle()
+        });
+      });
+
+      $(document).ready(function(){
+        $("#login_toggle").click(function(){
+          $("#login-form, #reg-form").slideToggle()
+        });
+      });
 
   </script>
   
@@ -78,14 +82,14 @@
         <option name="state" id="female" value="Male">Female</option>
       </select>
       <input class="button" type="button" onclick="valid(document.getElementById('reg-form'))" name="submit" value="Register"/>
-      <p class="message">Already Registered? <a href="#" onclick="openbox('login-form'); return false">Login</a></p>
+      <p class="message">Already Registered? <a id="reg_toggle" href="#">Login</a></p>
       </form>
       
       <form class="login-form" name="login-form"  id="login-form">
         <input type="email" name="login_email" placeholder="E-mail" id="login_email">
         <input type="password" name="login_password" placeholder="Password" id="login_password">
         <input class="button" type="button" onclick="login(document.getElementById('login-form'))" name="submit" value="Login"/>
-        <p class="message">Not Registered? <a href="#">Register</a></p>
+        <p class="message">Not Registered? <a id="login_toggle" href="#">Register</a></p>
       </form>
     </div>
   </div>
