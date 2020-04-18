@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" type="text/css" href="css/login.css">
   <title>Login - Medical Card</title>
   <h1>Login - Medical Card</h1>
   <script type="text/javascript">
@@ -33,7 +33,26 @@
         alert(fail);
       else 
         window.location.href = "index.html"
+
     }
+
+    function login (form){
+      var empty = false;
+      var email = form.login_email.value;
+      var password = form.login_password.value;
+      if (email == "" || email == " "){
+        empty = "Enter Your e-mail please";
+      }
+      else if (password == "" || password == " "){
+        empty = "Enter Your password please";
+      }
+      if (empty)
+        alert(empty);
+      else 
+        window.location.href = "index.html"
+      
+    }
+
     function openbox (id) {
         display = document.getElementById(id).style.display;
         if (display == 'none'){
@@ -61,9 +80,10 @@
       <input class="button" type="button" onclick="valid(document.getElementById('reg-form'))" name="submit" value="Register"/>
       <p class="message">Already Registered? <a href="#" onclick="openbox('login-form'); return false">Login</a></p>
       </form>
+      
       <form class="login-form" name="login-form"  id="login-form">
-        <input type="email" placeholder="E-mail">
-        <input type="password" placeholder="Password">
+        <input type="email" name="login_email" placeholder="E-mail" id="login_email">
+        <input type="password" name="login_password" placeholder="Password" id="login_password">
         <input class="button" type="button" onclick="login(document.getElementById('login-form'))" name="submit" value="Login"/>
         <p class="message">Not Registered? <a href="#">Register</a></p>
       </form>

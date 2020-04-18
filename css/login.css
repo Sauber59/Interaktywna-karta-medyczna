@@ -6,8 +6,11 @@ h1 {
 
 body {
     font-family: "Roboto", sans-serif;
-    background-image: url('login.jpg');
+    background-image: url('../img/login.jpg');
     background-size: cover;
+    
+    -webkit-font-smoothing: antialiased;
+    -webkit-overflow-scrolling: touch;
 }
 
 .login-page {
@@ -70,7 +73,7 @@ body {
 }
 
 .form .message {
-    margin: 15px 0 0;
+    margin: 15px 0px 15px;
     color: #ffffff;
     font-size: 12px;
 }
