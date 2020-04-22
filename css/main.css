@@ -28,12 +28,13 @@ body {
     text-align: right;
 }
 
-.menu li{
+.menu li {
     display: inline;
     margin: 15px;
     font-weight: bold;
     font-size: 20px;
 }
+
 
 a {
     text-decoration: none;
@@ -52,12 +53,13 @@ a:hover {
     color: rgb(214, 219, 230);
 }
 
-.col-3 {
+.col-2 {
     height: 100px;
-    width: 33.333%;
+    width: 50%;
     background-color: rgba(11, 17, 31, 0.637);
-    margin: .5rem;
+    margin: 15px;
     text-align: center;
+    position: relative;
   }
   
 .row {
@@ -66,4 +68,18 @@ a:hover {
     align-items: center;
     align-content: center;
     justify-content: space-between;
+}
+
+.row a {
+    font-size: 24px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%)
+}
+
+.alert {
+    font-weight: bold;
+    color: red;
 }
