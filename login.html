@@ -1,97 +1,103 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <link rel="stylesheet" type="text/css" href="css/login.css">
   <title>Login - Medical Card</title>
   <h1>Login - Medical Card</h1>
   <script type="text/javascript">
-    function valid (form){
+    function valid(form) {
       var fail = false;
       var name = form.name.value;
       var password = form.password.value;
       var repassword = form.repassword.value;
       var email = form.email.value;
-      if (name == "" || name == " "){
+      if (name == "" || name == " ") {
         fail = "Enter your name please";
       }
-      else if (password == ""){
+      else if (password == "") {
         fail = "Enter your password please";
       }
-      else if (repassword == ""){
+      else if (repassword == "") {
         fail = "Confirm your password please";
       }
-      else if (email == ""){
+      else if (email == "") {
         fail = "Enter your e-mail please";
       }
-      else if (repassword != password){
+      else if (repassword != password) {
         fail = "Passwords are not the same, please try again";
       }
-      
+
       if (fail)
         alert(fail);
-      else 
+      else
         window.location.href = "index.html"
 
     }
 
-    function login (form){
+    function login(form) {
       var empty = false;
       var email = form.login_email.value;
       var password = form.login_password.value;
-      if (email == "" || email == " "){
+      if (email == "" || email == " ") {
         empty = "Enter Your e-mail please";
       }
-      else if (password == "" || password == " "){
+      else if (password == "" || password == " ") {
         empty = "Enter Your password please";
       }
       if (empty)
         alert(empty);
-      else 
+      else
         window.location.href = "index.html"
-      
+
     }
 
-      $(document).ready(function(){
-        $("#reg_toggle").click(function(){
-          $("#login-form, #reg-form").slideToggle()
-        });
+    $(document).ready(function () {
+      $("#reg_toggle").click(function () {
+        $("#login-form, #reg-form").slideToggle()
       });
+    });
 
-      $(document).ready(function(){
-        $("#login_toggle").click(function(){
-          $("#login-form, #reg-form").slideToggle()
-        });
+    $(document).ready(function () {
+      $("#login_toggle").click(function () {
+        $("#login-form, #reg-form").slideToggle()
       });
+    });
 
   </script>
-  
+
 </head>
+
 <body>
   <div class="login">
     <div class="form">
       <form class="reg-form" method="POST" name="reg-form" id="reg-form">
-      <input type="text" name="name" placeholder="Name" id="name" />
-      <input type="password" name="password" placeholder="Password" id="password" />
-      <input type="password" name="repassword" placeholder="Repeat your password" id="repassword" />
-      <input type="email" name="email" placeholder="E-mail" id="email" />
-      <select>
-        <option name="state" id="male" value="Male">Male</option>
-        <option name="state" id="female" value="Male">Female</option>
-      </select>
-      <input class="button" type="button" onclick="valid(document.getElementById('reg-form'))" name="submit" value="Register"/>
-      <p class="message">Already Registered? <a id="reg_toggle" href="#">Login</a></p>
+        <input type="text" name="name" placeholder="Name" id="name" />
+        <input type="password" name="password" placeholder="Password" id="password" />
+        <input type="password" name="repassword" placeholder="Repeat your password" id="repassword" />
+        <input type="email" name="email" placeholder="E-mail" id="email" />
+        <select>
+          <option name="state" id="male" value="Male">Male</option>
+          <option name="state" id="female" value="Male">Female</option>
+        </select>
+        <input class="button" type="button" onclick="valid(document.getElementById('reg-form'))" name="submit"
+          value="Register" />
+        <p class="message">Already Registered? <a id="reg_toggle" href="#">Login</a></p>
       </form>
-      
-      <form class="login-form" name="login-form"  id="login-form">
+
+      <form class="login-form" name="login-form" id="login-form">
         <input type="email" name="login_email" placeholder="E-mail" id="login_email">
         <input type="password" name="login_password" placeholder="Password" id="login_password">
-        <input class="button" type="button" onclick="login(document.getElementById('login-form'))" name="submit" value="Login"/>
+        <input class="button" type="button" onclick="login(document.getElementById('login-form'))" name="submit"
+          value="Login" />
         <p class="message">Not Registered? <a id="login_toggle" href="#">Register</a></p>
       </form>
     </div>
   </div>
 </body>
+
 </html>
