@@ -4,8 +4,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-signin-client_id" content="862214234748-o3as09k1usflenuod97ir2hff8pfnig3.apps.googleusercontent.com">
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
   <link rel="stylesheet" type="text/css" href="css/login.css">
   <title>Login - Medical Card</title>
   <h1>Login - Medical Card</h1>
@@ -96,7 +98,9 @@
           value="Login" />
         <p class="message">Not Registered? <a id="login_toggle" href="#">Register</a></p>
       </form>
+      <div class="g-signin2" data-onsuccess="onSignIn"></div>
     </div>
+    
   </div>
 </body>
 
