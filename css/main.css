@@ -99,6 +99,8 @@ a:hover {
     align-items: center;
     align-content: center;
     justify-content: space-between;
+    display: none;
+    width: 30%;
 }
 
 
