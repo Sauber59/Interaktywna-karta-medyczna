@@ -4,7 +4,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="google-signin-client_id" content="862214234748-o3as09k1usflenuod97ir2hff8pfnig3.apps.googleusercontent.com">
+  <meta name="google-signin-client_id"
+    content="862214234748-o3as09k1usflenuod97ir2hff8pfnig3.apps.googleusercontent.com">
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script src="https://apis.google.com/js/platform.js" async defer></script>
@@ -14,55 +15,11 @@
   <script defer src="https://www.gstatic.com/firebasejs/7.14.1/firebase-auth.js"></script>
   <script defer src="https://www.gstatic.com/firebasejs/7.14.1/firebase-firestore.js"></script>
 
+  <script src="firebaseauth.js"></script>
+
   <title>Login - Medical Card</title>
   <h1>Login - Medical Card</h1>
   <script type="text/javascript">
-    function valid(form) {
-      var fail = false;
-      var name = form.name.value;
-      var password = form.password.value;
-      var repassword = form.repassword.value;
-      var email = form.email.value;
-      if (name == "" || name == " ") {
-        fail = "Enter your name please";
-      }
-      else if (password == "") {
-        fail = "Enter your password please";
-      }
-      else if (repassword == "") {
-        fail = "Confirm your password please";
-      }
-      else if (email == "") {
-        fail = "Enter your e-mail please";
-      }
-      else if (repassword != password) {
-        fail = "Passwords are not the same, please try again";
-      }
-
-      if (fail)
-        alert(fail);
-      else
-        window.location.href = "index.html"
-
-    }
-
-    function login(form) {
-      var empty = false;
-      var email = form.login_email.value;
-      var password = form.login_password.value;
-      if (email == "" || email == " ") {
-        empty = "Enter Your e-mail please";
-      }
-      else if (password == "" || password == " ") {
-        empty = "Enter Your password please";
-      }
-      if (empty)
-        alert(empty);
-      else
-        window.location.href = "index.html"
-
-    }
-
     $(document).ready(function () {
       $("#reg_toggle").click(function () {
         $("#login-form, #reg-form").slideToggle()
@@ -80,8 +37,8 @@
 </head>
 
 <body>
-  <div class="login">
-    <div class="form" id="app">
+  <div class="login" id="app">
+    <div class="form">
       <form class="reg-form" method="POST" name="reg-form" id="reg-form">
         <input type="text" name="name" placeholder="Name" id="name" />
         <input type="password" name="password" placeholder="Password" id="password" />
@@ -92,8 +49,9 @@
           <option name="state" id="male" value="Male">Male</option>
           <option name="state" id="female" value="Male">Female</option>
         </select>
-        <!-- <input class="button" type="button"  name="submit"  onclick="valid(document.getElementById('reg-form'))" value="Register" /> -->
-        <input class="button" type="button" name="submit" v-on:click="register()" value="Register" />
+        <input class="button" type="button" name="submit" onclick="register(document.getElementById('reg-form'))"
+          value="Register" />
+        <!-- <input class="button" type="button" name="submit" v-on:click="register()" value="Register" /> MIALO BYC DO VUE -->
 
         <p class="message">Already Registered? <a id="reg_toggle" href="#">Login</a></p>
       </form>
@@ -101,54 +59,15 @@
       <form class="login-form" name="login-form" id="login-form">
         <input type="email" name="login_email" placeholder="E-mail" id="login_email">
         <input type="password" name="login_password" placeholder="Password" id="login_password">
-        <!-- <input class="button" type="button" onclick="login(document.getElementById('login-form'))" name="submit"
-          value="Login" /> -->
-        <input class="button" type="button" v-on:click="signIn()" name="submit" value="Login" />
+        <input class="button" type="button" onclick="login()" name="submit" value="Login" />
+        <!-- <input class="button" type="button" v-on:click="signIn()" name="submit" value="Login" />   MIALO BYC DO VUE-->
         <p class="message">Not Registered? <a id="login_toggle" href="#">Register</a></p>
       </form>
       <div class="g-signin2" data-onsuccess="onSignIn"></div>
     </div>
-    
   </div>
 
-  <script>
-    // Your web app's Firebase configuration
-    var firebaseConfig = {
-      apiKey: "AIzaSyA0gA-N5ihel2sCfUTeDn4f4gBVK2Jofnw",
-      authDomain: "interaktywna-karta-medyczna.firebaseapp.com",
-      databaseURL: "https://interaktywna-karta-medyczna.firebaseio.com",
-      projectId: "interaktywna-karta-medyczna",
-      storageBucket: "interaktywna-karta-medyczna.appspot.com",
-      messagingSenderId: "359077375361",
-      appId: "1:359077375361:web:8062ba39441bd769c68c80"
-    };
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
 
-    var app = new Vue({
-      el: '#app',
-      data: {
-        email: '',
-        password: '',
-        authUser: null
-      },
-      methods: {
-        register() {
-          firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
-        },
-        signOut() {
-          firebase.auth().signOut();
-        },
-        signIn() {
-          firebase.auth().signInWithEmailAndPassword(this.email, this.password);
-        }
-      },
-      created() {
-        firebase.auth().onAuthStateChanged(user => { this.authUser = user });
-      }
-
-    }); 
-  </script>
 </body>
 
 </html>

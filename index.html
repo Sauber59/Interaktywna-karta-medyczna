@@ -9,22 +9,25 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel = "stylesheet">
+    <link href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="firebaseauth.js"></script>
+
 
     <script>
-        $(function() {
-           $( "#check_date" ).datepicker();
-           $( "#check_date" ).datepicker();
+        $(function () {
+            $("#check_date").datepicker();
+            $("#check_date").datepicker();
         });
-        
+
         $(document).ready(function () {
             $("#book_toggle").click(function () {
-              $("#book-form_col-2").slideToggle()
+                $("#book-form_col-2").slideToggle()
             });
-          });
-     </script>
+        });
+    </script>
 
-     
+
 </head>
 
 <body>
@@ -33,11 +36,12 @@
             <h1>Interaktywna Karta Medyczna</h2>
         </div>
         <div class="menu">
+            <div id="uzytkownik">Nazwa uzytkownika</div>
             <ul>
                 <li><a href="profile.html">Mój Profil</a></li>
                 <li><a href="#">Znajdż placówkę</a></li>
                 <li><a href="login.html">Wyloguj się</a></li>
-                <li><a  class="alert" href="https://coronavirus.jhu.edu/map.html">COVID-19</a></li>
+                <li><a class="alert" href="https://coronavirus.jhu.edu/map.html">COVID-19</a></li>
             </ul>
         </div>
     </div>
@@ -45,7 +49,7 @@
     <div class="row">
         <div class="col-2"><span><a id="book_toggle" href="#">Zapisać się na badanie</a></span></div>
         <div class="col-2"><span><a href="#">Dodać wyniki badania</a></span></div>
-      </div>
+    </div>
 
 
     <div class="book">
@@ -70,7 +74,7 @@
             </form>
         </div>
         <div class="calendar_col-2">
-            
+
         </div>
     </div>
 </body>
