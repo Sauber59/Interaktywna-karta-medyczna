@@ -39,7 +39,7 @@ function register(form) {
     if (fail)
         alert(fail);
     else {
-        firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
+        firebase.auth().createUserWithEmailAndPassword(email, password)
             .then(() => {
                 alert("Zarejestrowano");
                 x.style.display = "block";
