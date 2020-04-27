@@ -10,8 +10,6 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 var user;
 
-//const auth = firebase.auth();
-
 function register(form) {
     var fail = false;
     var name = form.name.value;
@@ -37,7 +35,7 @@ function register(form) {
     if (fail)
         alert(fail);
     else {
-        firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
+        firebase.auth().createUserWithEmailAndPassword(email, password)
             .then(() => {
                 alert("Zarejestrowano");
                 window.location.href = "index.html";
