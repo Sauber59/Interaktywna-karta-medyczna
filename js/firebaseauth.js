@@ -50,8 +50,10 @@ function register(form) {
     }
 }
 function wyloguj() {
-    auth.signOut();
-
+    var x = document.getElementById("index_page");
+    var y = document.getElementById("login_page");
+    x.style.display = "none";
+    y.style.display = "block";
     alert("Wylogowano");
 }
 
@@ -80,6 +82,8 @@ function login() {
             .catch(error => (alert(error)));
     }
 }
+
+
 
 ///////////////////////////////////////////////////////////////////////////
 // var app = new Vue({
