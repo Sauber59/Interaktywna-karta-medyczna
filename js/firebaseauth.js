@@ -10,12 +10,16 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 var user;
 
+//const auth = firebase.auth();
+
 function register(form) {
     var fail = false;
     var name = form.name.value;
     var email = document.getElementById("email").value;
     var password = document.getElementById("password").value;
     var repassword = document.getElementById("repassword").value;
+    var x = document.getElementById("index_page");
+    var y = document.getElementById("login_page");
     if (name == "" || name == " ") {
         fail = "Enter your name please";
     }
@@ -35,10 +39,11 @@ function register(form) {
     if (fail)
         alert(fail);
     else {
-        firebase.auth().createUserWithEmailAndPassword(email, password)
+        firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
             .then(() => {
                 alert("Zarejestrowano");
-                window.location.href = "index.html";
+                x.style.display = "block";
+                y.style.display = "none";
                 user = firebase.auth().currentUser;
             })
             .catch(error => (alert(error)));
@@ -54,6 +59,8 @@ function login() {
     var empty = false;
     var email = document.getElementById("login_email");
     var password = document.getElementById("login_password");
+    var x = document.getElementById("index_page");
+    var y = document.getElementById("login_page");
     if (email == "" || email == " ") {
         empty = "Enter Your e-mail please";
     }
@@ -67,7 +74,8 @@ function login() {
             .then(() => {
                 alert("Zalogowano");
                 user = firebase.auth().currentUser;
-                window.location.href = "index.html";
+                x.style.display = "block";
+                y.style.display = "none";
             })
             .catch(error => (alert(error)));
     }

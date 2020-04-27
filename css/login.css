@@ -1,4 +1,8 @@
-h1 {
+.login_page {
+    display: block;
+}
+
+.title_login h1 {
     text-align: center;
     color: #ffffff;
     font-family: "Roboto", sans-serif;
@@ -8,6 +12,7 @@ body {
     font-family: "Roboto", sans-serif;
     background-image: url('../img/login.jpg');
     background-size: cover;
+    height: 100%;
     
     -webkit-font-smoothing: antialiased;
     -webkit-overflow-scrolling: touch;
@@ -92,5 +97,6 @@ body {
 .alert {
   color: red;
 }
+
 
 

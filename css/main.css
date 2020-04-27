@@ -1,8 +1,15 @@
+.index_page {
+    display: none;
+}
+
 body {
     font-family: "Roboto", sans-serif;
     background-image: url('../img/login.jpg');
     background-size: cover;
     height: 100%;
+
+    -webkit-font-smoothing: antialiased;
+    -webkit-overflow-scrolling: touch;
 }
 
 .header {
