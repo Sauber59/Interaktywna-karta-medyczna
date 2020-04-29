@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="css/login.css" />
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <meta name="google-signin-client_id" content="862214234748-o3as09k1usflenuod97ir2hff8pfnig3.apps.googleusercontent.com">
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBOui0BWjSbz_Q8aRGp7dU21SIabAWUADQ&callback=initMap"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
@@ -17,8 +18,6 @@
     <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-app.js"></script>
     <script defer src="https://www.gstatic.com/firebasejs/7.14.1/firebase-auth.js"></script>
     <script defer src="https://www.gstatic.com/firebasejs/7.14.1/firebase-firestore.js"></script>
-    <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js" type="text/javascript" charset="utf-8"></script>
-    <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js" type="text/javascript" charset="utf-8"></script>
     <script src="js/firebaseauth.js"></script>
     <script src="js/toggle.js"></script>
     <script src="js/index.js"></script>
@@ -107,7 +106,8 @@
                 <input type="text" name="info" placeholder="Informacja" id="info">
             </form>
         </div>
-        <div class="book_map" id="mapContainer"></div>
+        
+        <div class="book_map" id="map"></div>
     </div>
 
     <div class="result">
