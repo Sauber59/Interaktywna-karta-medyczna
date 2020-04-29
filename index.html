@@ -27,7 +27,7 @@
 
 </head>
 
-<body>
+<body onunload="signOut()">
     <div class="login_page" id="login_page">
         <div class="title_login"><h1>Login - Medical Card</h1></div>
       
@@ -82,7 +82,7 @@
 
     <div class="row">
         <div class="col-2"><span><a id="book_toggle" href="#">Zapisać się na badanie</a></span></div>
-        <div class="col-2"><span><a href="#">Dodać wyniki badania</a></span></div>
+        <div class="col-2"><span><a id="result_toggle" href="#">Dodać wyniki badania</a></span></div>
     </div>
 
 
@@ -101,15 +101,40 @@
                 <input type="text" name="check_name" placeholder="Badanie" id="check_name">
                 <label for="check_date">Termin</label>
                 <input type="text" name="check_date" placeholder="Data" id="check_date">
-                <label for="check_date">Liekarz</label>
+                <label for="doctor">Liekarz</label>
                 <input type="text" name="doctor" placeholder="Liekarz" id="doctor">
-                <label for="check_date">Dodatkowa informacja</label>
+                <label for="info">Dodatkowa informacja</label>
                 <input type="text" name="info" placeholder="Informacja" id="info">
             </form>
         </div>
         <div class="book_map" id="mapContainer"></div>
     </div>
-</div>
+
+    <div class="result">
+      <div class="result_form_col-2" id="result-form_col-2">
+          <form class="result-form" method="POST" name="result-form" id="result-form">
+              <label for="place">Wybierz placówkę</label>
+              <select type="text" name="place" placeholder="Placówka" id="place">
+                  <option>Placówka 1</option>
+                  <option>Placówka 2</option>
+                  <option>Placówka 3</option>
+                  <option>Placówka 4</option>
+                  <option>Placówka 5</option>
+              </select>
+              <label for="check_name">Nazwa badania</label>
+              <input type="text" name="check_name" placeholder="Badanie" id="check_name">
+              <label for="result_date">Data Badania</label>
+              <input type="text" name="result_date" placeholder="Data" id="result_date">
+              <label for="result_date">Liekarz</label>
+              <input type="text" name="doctor" placeholder="Liekarz" id="doctor">
+              <label for="result">Wyniki badania</label>
+              <input type="text" name="result" placeholder="Wyniki" id="result">
+              <label for="info">Dodatkowa informacja</label>
+              <input type="text" name="info" placeholder="Informacja" id="info">
+          </form>
+      </div>
+    </div>
+  </div>
 </body>
 
 </html>

@@ -12,3 +12,7 @@ var map = new H.Map(
       zoom: 10,
       center: { lng: 13.4, lat: 52.51 }
     });
+
+var mapEvents = new H.mapevents.MapEvents(map);
+
+new H.mapevents.Behavior(mapEvents);
