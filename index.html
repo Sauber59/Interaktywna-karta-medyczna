@@ -23,6 +23,7 @@
     <script src="js/toggle.js"></script>
     <script src="js/index.js"></script>
     <script src="js/maps.js"></script>
+    <script src="js/googlesignin.js"></script>
 
 </head>
 
@@ -56,7 +57,7 @@
               <!-- <input class="button" type="button" v-on:click="signIn()" name="submit" value="Login" />   MIALO BYC DO VUE-->
               <p class="message">Not Registered? <a id="login_toggle" href="#">Register</a></p>
             </form>
-            <div class="g-signin2" data-onsuccess="onSignIn"></div>
+            <div id="my-signin2" class="g-signin2" data-onsuccess="onSignIn" data-longtitle="true"></div>
           </div>
         </div>
       </div>
