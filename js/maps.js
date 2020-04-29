@@ -1,18 +1,10 @@
-
-var platform = new H.service.Platform({
-    'apikey': 'bwuQvm6OG-pihgUezkUzpXetTVrnMvnLUgC3ghIVeNo'
-    });
-
-var maptypes = platform.createDefaultLayers();
-
-var map = new H.Map(
-    document.getElementById('mapContainer'),
-    maptypes.vector.normal.map,
-    {
-      zoom: 10,
-      center: { lng: 13.4, lat: 52.51 }
-    });
-
-var mapEvents = new H.mapevents.MapEvents(map);
-
-new H.mapevents.Behavior(mapEvents);
+// Initialize and add the map
+function initMap() {
+  // The location of Uluru
+  var uluru = {lat: -25.344, lng: 131.036};
+  // The map, centered at Uluru
+  var map = new google.maps.Map(
+      document.getElementById('map'), {zoom: 4, center: uluru});
+  // The marker, positioned at Uluru
+  var marker = new google.maps.Marker({position: uluru, map: map});
+}

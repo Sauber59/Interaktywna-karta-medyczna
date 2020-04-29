@@ -160,6 +160,12 @@ a:hover {
     position: relative;
 }
 
+#map {
+    height: 450px; 
+    width: 70%;  
+    display: none;
+   }
+
 .result {
     display: flex;
     flex-flow: row nowrap;

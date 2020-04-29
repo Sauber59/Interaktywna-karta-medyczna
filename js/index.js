@@ -11,6 +11,7 @@ $(function () {
 $(document).ready(function () {
     $("#book_toggle").click(function () {
         $("#book-form_col-2").slideToggle()
+        $("#map").slideToggle()
     });
 });
 
