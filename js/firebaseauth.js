@@ -49,13 +49,7 @@ function register(form) {
             .catch(error => (alert(error)));
     }
 }
-function wyloguj() {
-    var x = document.getElementById("index_page");
-    var y = document.getElementById("login_page");
-    x.style.display = "none";
-    y.style.display = "block";
-    alert("Wylogowano");
-}
+
 
 function login() {
     var empty = false;
