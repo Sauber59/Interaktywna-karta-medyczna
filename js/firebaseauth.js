@@ -9,7 +9,9 @@ var firebaseConfig = {
 };
 firebase.initializeApp(firebaseConfig);
 var firebaseRef = firebase.database().ref();
-var user;
+//var user;
+wizyty = [];
+
 
 //baza danych
 var database = firebase.database();
@@ -55,7 +57,6 @@ function register(form) {
     }
 }
 
-
 function login() {
     var empty = false;
     var email = document.getElementById("login_email");
@@ -79,6 +80,8 @@ function login() {
                 y.style.display = "none";
                 document.getElementById("uzytkownik").innerHTML = "Uzytkownik: " + user.email;
                 console.log(user);
+                wizyty = getVisits();
+                console.log(wizyty);
             })
             .catch(error => (alert(error)));
     }
@@ -117,9 +120,30 @@ function writeVisitData() {
 }
 
 
-function getData() {
-    firebase.database
+function getVisits() {
+    listaWizyt = [];
+    firebase.database().ref('visits/' + user.uid).on("value", function (snapshot) {
+
+        snapshot.forEach(childSnapshot => {
+            var visit = childSnapshot.val();
+            visit.key = childSnapshot.key;
+
+            listaWizyt.push(visit);
+
+            var e = document.createElement("li");
+            e.setAttribute('class', 'list--item');
+            e.onclick = function () {
+                this.parentElement.removeChild(this);
+            };
+            var t = document.createTextNode(visit.data + " - " + visit.nazwa_badania);
+
+            e.appendChild(t);
+            document.getElementById("visits_list").appendChild(e);
+        });
+    });
+    return listaWizyt;
 }
+
 
 ///////////////////////////////////////////////////////////////////////////
 // var app = new Vue({

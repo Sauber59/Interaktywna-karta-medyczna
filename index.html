@@ -7,6 +7,7 @@
   <title>Interaktywna karta medyczna</title>
   <link rel="stylesheet" type="text/css" href="css/main.css" />
   <link rel="stylesheet" type="text/css" href="css/login.css" />
+  <link rel="stylesheet" type="text/css" href="css/visits_list.css" />
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <meta name="google-signin-client_id"
     content="862214234748-o3as09k1usflenuod97ir2hff8pfnig3.apps.googleusercontent.com">
@@ -26,6 +27,7 @@
   <script src="js/index.js"></script>
   <script src="js/maps.js"></script>
   <script src="js/googlesignin.js"></script>
+
 
 </head>
 
@@ -115,6 +117,12 @@
             value="Zapisz" style="align-content: center; margin-top: 15px;" />
         </form>
       </div>
+
+      <section class="visits" id="visits">
+        <h1 class="list--title">Zapisane badania:</h1>
+        <ul class="list" id="visits_list"></ul>
+      </section>
+
       <div class="calendar_col-2">
 
       </div>
