@@ -10,24 +10,25 @@
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <meta name="google-signin-client_id"
     content="862214234748-o3as09k1usflenuod97ir2hff8pfnig3.apps.googleusercontent.com">
+  <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBOui0BWjSbz_Q8aRGp7dU21SIabAWUADQ&callback=initMap"></script>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script src="https://apis.google.com/js/platform.js" async defer></script>
   <link href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-app.js"></script>
-  <script src="/__/firebase/7.14.2/firebase-app.js"></script>
   <script defer src="https://www.gstatic.com/firebasejs/7.14.1/firebase-auth.js"></script>
   <script defer src="https://www.gstatic.com/firebasejs/7.14.1/firebase-firestore.js"></script>
-  <script defer src="https://www.gstatic.com/firebasejs/7.14.1/firebase-database.js"></script>
-
   <script src="js/firebaseauth.js"></script>
   <script src="js/toggle.js"></script>
   <script src="js/index.js"></script>
+  <script src="js/maps.js"></script>
+  <script src="js/googlesignin.js"></script>
 
 </head>
 
-<body>
+<body onunload="signOut()">
   <div class="login_page" id="login_page">
     <div class="title_login">
       <h1>Login - Medical Card</h1>
@@ -59,9 +60,11 @@
           <!-- <input class="button" type="button" v-on:click="signIn()" name="submit" value="Login" />   MIALO BYC DO VUE-->
           <p class="message">Not Registered? <a id="login_toggle" href="#">Register</a></p>
         </form>
-        <div class="g-signin2" data-onsuccess="onSignIn"></div>
+        <div id="my-signin2" class="g-signin2" data-onsuccess="onSignIn" data-longtitle="true"></div>
       </div>
     </div>
+  </div>
+  </div>
   </div>
 
 
@@ -76,7 +79,7 @@
         <ul>
           <li><a href="profile.html">Mój Profil</a></li>
           <li><a href="#">Znajdż placówkę</a></li>
-          <li><a href="login.html">Wyloguj się</a></li>
+          <li><a class="log_off" id="log_off" onclick="signOut()" href="#">Wyloguj się</a></li>
           <li><a class="alert" href="https://coronavirus.jhu.edu/map.html">COVID-19</a></li>
         </ul>
       </div>
@@ -84,7 +87,7 @@
 
     <div class="row">
       <div class="col-2"><span><a id="book_toggle" href="#">Zapisać się na badanie</a></span></div>
-      <div class="col-2"><span><a href="#">Dodać wyniki badania</a></span></div>
+      <div class="col-2"><span><a id="result_toggle" href="#">Dodać wyniki badania</a></span></div>
     </div>
 
 

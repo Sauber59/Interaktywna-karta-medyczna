@@ -54,11 +54,7 @@ function register(form) {
             .catch(error => (alert(error)));
     }
 }
-function wyloguj() {
-    auth.signOut();
 
-    alert("Wylogowano");
-}
 
 function login() {
     var empty = false;
