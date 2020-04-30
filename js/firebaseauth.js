@@ -8,9 +8,11 @@ var firebaseConfig = {
     appId: "1:359077375361:web:8062ba39441bd769c68c80"
 };
 firebase.initializeApp(firebaseConfig);
+var firebaseRef = firebase.database().ref();
 var user;
 
-//const auth = firebase.auth();
+//baza danych
+var database = firebase.database();
 
 function register(form) {
     var fail = false;
@@ -45,6 +47,9 @@ function register(form) {
                 x.style.display = "block";
                 y.style.display = "none";
                 user = firebase.auth().currentUser;
+                document.getElementById("uzytkownik").innerHTML = "Uzytkownik: " + user.email;
+
+                writeUserData(user.uid, document.getElementById("name").value, user.email);
             })
             .catch(error => (alert(error)));
     }
@@ -76,9 +81,48 @@ function login() {
                 user = firebase.auth().currentUser;
                 x.style.display = "block";
                 y.style.display = "none";
+                document.getElementById("uzytkownik").innerHTML = "Uzytkownik: " + user.email;
+                console.log(user);
             })
             .catch(error => (alert(error)));
     }
+}
+
+
+function writeUserData(userId, username, email) {
+    firebase.database().ref('users/' + userId).set({
+        username: username,
+        email: email
+    }, function (error) {
+        if (error) {
+            alert(error);
+        } else {
+        }
+    });
+}
+
+
+
+function writeVisitData() {
+    firebase.database().ref('visits/' + user.uid).push({
+        email: user.email,
+        placowka: document.getElementById("place").value,
+        nazwa_badania: document.getElementById("check_name").value,
+        data: document.getElementById("check_date").value,
+        lekarz: document.getElementById("doctor").value,
+        informacje: document.getElementById("info").value,
+
+    }, function (error) {
+        if (error) {
+            alert(error);
+        } else {
+        }
+    });
+}
+
+
+function getData() {
+    firebase.database
 }
 
 ///////////////////////////////////////////////////////////////////////////
