@@ -101,12 +101,17 @@
       <div class="book_form_col-2" id="book-form_col-2">
         <form class="book-form" method="POST" name="book-form" id="book-form">
           <label for="place">Wybierz placówkę</label>
-          <select type="text" name="place" placeholder="Placówka" id="place">
-            <option>Placówka 1</option>
-            <option>Placówka 2</option>
-            <option>Placówka 3</option>
-            <option>Placówka 4</option>
-            <option>Placówka 5</option>
+          <select type="text" name="place" placeholder="Placówka" id="place" onchange="asd()">
+            <option value="rydygiera">Szpital Specjalistyczny im. Ludwika Rydygiera</option>
+            <option value="zeromskiego">Szpital Specjalistyczny im. Stefana Żeromskiego SP ZOZ</option>
+            <option value="rafal">Szpital Sw. Rafala</option>
+            <option value="uniwer">SP ZOZ Szpital Uniwersytecki</option>
+            <option value="ludwik">Wojewódzki Specjalistyczny Szpital Dziecięcy im. św. Ludwika</option>
+            <option value="dietla">Szpital Specjalistyczny im. Józefa Dietla</option>
+            <option value="narutowicza">Szpital Miejski Specjalistyczny im. G. Narutowicza</option>
+            <option value="paul">Krakowski Szpital Specjalistyczny im. Jana Pawła II</option>
+            <option value="milit">5 Wojskowy Szpital Kliniczny z Polikliniką SPZOZ</option>
+            <option value="grandego">Szpital Zakonu Bonifratrów Św. Jana Grandego</option>
           </select>
           <label for="check_name">Nazwa badania</label>
           <input type="text" name="check_name" placeholder="Badanie" id="check_name">
@@ -120,32 +125,33 @@
             value="Zapisz" style="align-content: center; margin-top: 15px;" />
         </form>
       </div>
+      <div class="map_col-2" id="map">
 
-      <div class="visits" id="visits">
-        <h1 class="list--title">Zapisane badania:</h1>
-        <ul class="list" id="visits_list" onclick="fillWynik()"></ul>
-      </div>
+        <div class="visits" id="visits">
+          <h1 class="list--title">Zapisane badania:</h1>
+          <ul class="list" id="visits_list" onclick="fillWynik()"></ul>
+        </div>
 
-      <div id="wynikBadania" style="display: none;">
-        <!-- przeniesc display do css -->
-        <form action="post" method="post">
-          <label>Opisowy wynik badania</label><br>
-          <textarea name="wynik_area" id="wynik_area" cols="30" rows="5"></textarea><br>
-          <label>Lekarstwa</label><br>
-          <textarea name="leki_area" id="leki_area" cols="30" rows="5"></textarea><br>
-          <label>Koszt badania:</label>
-          <input type="number" id="koszt"><br>
-          <button onclick="Aktualizuj()">Aktualizuj</button>
-        </form>
-      </div>
+        <div id="wynikBadania" style="display: none;">
+          <!-- przeniesc display do css -->
+          <form action="post" method="post">
+            <label>Opisowy wynik badania</label><br>
+            <textarea name="wynik_area" id="wynik_area" cols="30" rows="5"></textarea><br>
+            <label>Lekarstwa</label><br>
+            <textarea name="leki_area" id="leki_area" cols="30" rows="5"></textarea><br>
+            <label>Koszt badania:</label>
+            <input type="number" id="koszt"><br>
+            <button onclick="Aktualizuj()">Aktualizuj</button>
+          </form>
+        </div>
 
-      <div>
+        <div>
 
-        <div class="calendar_col-2">
+          <div class="calendar_col-2">
 
+          </div>
         </div>
       </div>
-    </div>
 </body>
 
 </html>
