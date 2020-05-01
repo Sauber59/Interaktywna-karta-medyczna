@@ -6,15 +6,22 @@ var firebaseConfig = {
     storageBucket: "interaktywna-karta-medyczna.appspot.com",
     messagingSenderId: "359077375361",
     appId: "1:359077375361:web:8062ba39441bd769c68c80"
-};
+}
+
 firebase.initializeApp(firebaseConfig);
-var firebaseRef = firebase.database().ref();
-//var user;
-wizyty = [];
-
-
-//baza danych
+var firebaseRef = firebase.database().ref().child('interaktywna-karta-medyczna');
+var visitsRef = firebaseRef.child('visits');
+var listaWizyt = [];
+var user;
 var database = firebase.database();
+
+var testowaTab = ["ewqeqeq", "dasd"];
+
+function drukuj() {
+    testowaTab.forEach(element => {
+        console.log(element);
+    });
+}
 
 function register(form) {
     var fail = false;
@@ -80,8 +87,8 @@ function login() {
                 y.style.display = "none";
                 document.getElementById("uzytkownik").innerHTML = "Uzytkownik: " + user.email;
                 console.log(user);
-                wizyty = getVisits();
-                console.log(wizyty);
+                getVisits(listaWizyt);
+                console.log(listaWizyt);
             })
             .catch(error => (alert(error)));
     }
@@ -115,33 +122,60 @@ function writeVisitData() {
         if (error) {
             alert(error);
         } else {
+            console.log(visitKey);
         }
     });
 }
 
 
-function getVisits() {
-    listaWizyt = [];
+function getVisits(visits) {
     firebase.database().ref('visits/' + user.uid).on("value", function (snapshot) {
 
         snapshot.forEach(childSnapshot => {
             var visit = childSnapshot.val();
-            visit.key = childSnapshot.key;
+            var key = childSnapshot.key;
 
             listaWizyt.push(visit);
-
-            var e = document.createElement("li");
-            e.setAttribute('class', 'list--item');
-            e.onclick = function () {
-                this.parentElement.removeChild(this);
-            };
-            var t = document.createTextNode(visit.data + " - " + visit.nazwa_badania);
-
-            e.appendChild(t);
-            document.getElementById("visits_list").appendChild(e);
+        });
+        listaWizyt.forEach(visit => {
+            addListVisitItem(visit);
         });
     });
-    return listaWizyt;
+}
+
+function addListVisitItem(key, visit) {
+    var e = document.createElement("li");
+    e.setAttribute('data-id', visit.key)
+    e.setAttribute('class', 'list--item');
+    e.setAttribute('id', 'list_item');
+
+    var t = document.createTextNode(visit.data + " - " + visit.nazwa_badania);
+
+    e.appendChild(t);
+    document.getElementById("visits_list").appendChild(e);
+}
+
+function fillWynik() {
+    console.log(this.id);
+}
+
+function updateVisitsList() {
+    firebase.database().ref('visits/' + user.uid).orderByKey().
+
+        limitToLast(1).on('child_added', function (snap) {
+            console.log('dodano', snap.val());
+            listaWizyt.push(snap.val());
+            addListVisitItem(snap.val);
+        })
+}
+
+function updateWynikBadania(key) {
+    firebase.database().ref('visits/' + user.uid).child(key).set({
+        Wynik: document.getElementById('wynik_area').value,
+        Leki: document.getElementById('leki_area').value,
+        Koszt: document.getElementById('koszt').value
+    });
+
 }
 
 

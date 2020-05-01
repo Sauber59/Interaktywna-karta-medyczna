@@ -18,10 +18,13 @@
   <script src="https://apis.google.com/js/platform.js" async defer></script>
   <link href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-app.js"></script>
+
+  <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase.js"></script>
+  <!-- <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-app.js"></script>
   <script defer src="https://www.gstatic.com/firebasejs/7.14.1/firebase-auth.js"></script>
   <script defer src="https://www.gstatic.com/firebasejs/7.14.1/firebase-firestore.js"></script>
-  <script defer src="https://www.gstatic.com/firebasejs/7.14.1/firebase-database.js"></script>
+  <script defer src="https://www.gstatic.com/firebasejs/7.14.1/firebase-database.js"></script> -->
+
   <script src="js/firebaseauth.js"></script>
   <script src="js/toggle.js"></script>
   <script src="js/index.js"></script>
@@ -118,16 +121,31 @@
         </form>
       </div>
 
-      <section class="visits" id="visits">
+      <div class="visits" id="visits">
         <h1 class="list--title">Zapisane badania:</h1>
-        <ul class="list" id="visits_list"></ul>
-      </section>
+        <ul class="list" id="visits_list" onclick="fillWynik()"></ul>
+      </div>
 
-      <div class="calendar_col-2">
+      <div id="wynikBadania" style="display: none;">
+        <!-- przeniesc display do css -->
+        <form action="post" method="post">
+          <label>Opisowy wynik badania</label><br>
+          <textarea name="wynik_area" id="wynik_area" cols="30" rows="5"></textarea><br>
+          <label>Lekarstwa</label><br>
+          <textarea name="leki_area" id="leki_area" cols="30" rows="5"></textarea><br>
+          <label>Koszt badania:</label>
+          <input type="number" id="koszt"><br>
+          <button onclick="Aktualizuj()">Aktualizuj</button>
+        </form>
+      </div>
 
+      <div>
+
+        <div class="calendar_col-2">
+
+        </div>
       </div>
     </div>
-  </div>
 </body>
 
 </html>
