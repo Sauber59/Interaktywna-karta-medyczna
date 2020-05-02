@@ -117,37 +117,54 @@ function writeVisitData() {
         data: document.getElementById("check_date").value,
         lekarz: document.getElementById("doctor").value,
         informacje: document.getElementById("info").value,
+        wynik: '',
+        leki: '',
+        koszt: 0
 
     }, function (error) {
         if (error) {
             alert(error);
         } else {
-            console.log(visitKey);
+            refreshData();
         }
     });
 }
 
 
 function getVisits(visits) {
-    firebase.database().ref('visits/' + user.uid).on("value", function (snapshot) {
+    firebase.database().ref('visits/' + user.uid).once("value", function (snapshot) {
 
-        snapshot.forEach(childSnapshot => {
-            var visit = childSnapshot.val();
-            var key = childSnapshot.key;
+        var visitsList = snapshot.val();
+        console.log(visitsList)
 
-            listaWizyt.push(visit);
-        });
-        listaWizyt.forEach(visit => {
-            addListVisitItem(visit);
-        });
+        for (let visit in visitsList) {
+
+            listaWizyt.push({
+                key: visit,
+                data: visitsList[visit].data,
+                email: visitsList[visit].email,
+                informacje: visitsList[visit].informacje,
+                lekarz: visitsList[visit].lekarz,
+                nazwa_badania: visitsList[visit].nazwa_badania,
+                placowka: visitsList[visit].placowka,
+                wynik: visitsList[visit].wynik,
+                leki: visitsList[visit].leki,
+                koszt: visitsList[visit].koszt
+            });
+        }
+        for (let i = 0; i < listaWizyt.length; i++) {
+            addListVisitItem(i, listaWizyt[i]);
+        };
     });
 }
 
-function addListVisitItem(key, visit) {
+function addListVisitItem(index, visit) {
     var e = document.createElement("li");
-    e.setAttribute('data-id', visit.key)
+    e.setAttribute('data-id', index)
+    e.setAttribute('data-key', visit.key)
     e.setAttribute('class', 'list--item');
     e.setAttribute('id', 'list_item');
+    e.setAttribute('onClick', 'fillWynik(this)');
 
     var t = document.createTextNode(visit.data + " - " + visit.nazwa_badania);
 
@@ -155,29 +172,38 @@ function addListVisitItem(key, visit) {
     document.getElementById("visits_list").appendChild(e);
 }
 
-function fillWynik() {
-    console.log(this.id);
+
+function fillWynik(obiekt) {
+    document.getElementById('wynikBadania').setAttribute('data-key', obiekt.getAttribute('data-key'))
+
+    var index = obiekt.getAttribute('data-id');
+    document.getElementById('check_name_').innerText = listaWizyt[index].nazwa_badania;
+    document.getElementById('place_').innerText = listaWizyt[index].placowka;
+    document.getElementById('check_date_').innerText = listaWizyt[index].data;
+    document.getElementById('doctor_').innerText = listaWizyt[index].lekarz;
+    document.getElementById('info_').innerText = listaWizyt[index].informacje;
+
+
+    document.getElementById('result').value = listaWizyt[index].wynik;
+    document.getElementById('medicines').value = listaWizyt[index].leki;
+    document.getElementById('cost').value = listaWizyt[index].koszt;
 }
-
-function updateVisitsList() {
-    firebase.database().ref('visits/' + user.uid).orderByKey().
-
-        limitToLast(1).on('child_added', function (snap) {
-            console.log('dodano', snap.val());
-            listaWizyt.push(snap.val());
-            addListVisitItem(snap.val);
-        })
-}
-
-function updateWynikBadania(key) {
-    firebase.database().ref('visits/' + user.uid).child(key).set({
-        Wynik: document.getElementById('wynik_area').value,
-        Leki: document.getElementById('leki_area').value,
-        Koszt: document.getElementById('koszt').value
+function updateWynikBadania() {
+    var key = document.getElementById('wynikBadania').getAttribute('data-key');
+    firebase.database().ref('visits/' + user.uid).child(key).update({
+        wynik: document.getElementById('result').value,
+        leki: document.getElementById('medicines').value,
+        koszt: document.getElementById('cost').value
     });
 
+    refreshData();
 }
 
+function refreshData() {
+    listaWizyt = [];
+    document.getElementById('visits_list').innerHTML = '';
+    getVisits(listaWizyt);
+}
 
 ///////////////////////////////////////////////////////////////////////////
 // var app = new Vue({
