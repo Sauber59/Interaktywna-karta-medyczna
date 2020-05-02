@@ -6,13 +6,22 @@ var firebaseConfig = {
     storageBucket: "interaktywna-karta-medyczna.appspot.com",
     messagingSenderId: "359077375361",
     appId: "1:359077375361:web:8062ba39441bd769c68c80"
-};
-firebase.initializeApp(firebaseConfig);
-var firebaseRef = firebase.database().ref();
-var user;
+}
 
-//baza danych
+firebase.initializeApp(firebaseConfig);
+var firebaseRef = firebase.database().ref().child('interaktywna-karta-medyczna');
+var visitsRef = firebaseRef.child('visits');
+var listaWizyt = [];
+var user;
 var database = firebase.database();
+
+var testowaTab = ["ewqeqeq", "dasd"];
+
+function drukuj() {
+    testowaTab.forEach(element => {
+        console.log(element);
+    });
+}
 
 function register(form) {
     var fail = false;
@@ -55,7 +64,6 @@ function register(form) {
     }
 }
 
-
 function login() {
     var empty = false;
     var email = document.getElementById("login_email");
@@ -79,6 +87,8 @@ function login() {
                 y.style.display = "none";
                 document.getElementById("uzytkownik").innerHTML = "Uzytkownik: " + user.email;
                 console.log(user);
+                getVisits(listaWizyt);
+                console.log(listaWizyt);
             })
             .catch(error => (alert(error)));
     }
@@ -107,18 +117,92 @@ function writeVisitData() {
         data: document.getElementById("check_date").value,
         lekarz: document.getElementById("doctor").value,
         informacje: document.getElementById("info").value,
+        wynik: '',
+        leki: '',
+        koszt: 0
 
     }, function (error) {
         if (error) {
             alert(error);
         } else {
+            refreshData();
         }
     });
 }
 
 
-function getData() {
-    firebase.database
+function getVisits(visits) {
+    firebase.database().ref('visits/' + user.uid).once("value", function (snapshot) {
+
+        var visitsList = snapshot.val();
+        console.log(visitsList)
+
+        for (let visit in visitsList) {
+
+            listaWizyt.push({
+                key: visit,
+                data: visitsList[visit].data,
+                email: visitsList[visit].email,
+                informacje: visitsList[visit].informacje,
+                lekarz: visitsList[visit].lekarz,
+                nazwa_badania: visitsList[visit].nazwa_badania,
+                placowka: visitsList[visit].placowka,
+                wynik: visitsList[visit].wynik,
+                leki: visitsList[visit].leki,
+                koszt: visitsList[visit].koszt
+            });
+        }
+        for (let i = 0; i < listaWizyt.length; i++) {
+            addListVisitItem(i, listaWizyt[i]);
+        };
+    });
+}
+
+function addListVisitItem(index, visit) {
+    var e = document.createElement("li");
+    e.setAttribute('data-id', index)
+    e.setAttribute('data-key', visit.key)
+    e.setAttribute('class', 'list--item');
+    e.setAttribute('id', 'list_item');
+    e.setAttribute('onClick', 'fillWynik(this)');
+
+    var t = document.createTextNode(visit.data + " - " + visit.nazwa_badania);
+
+    e.appendChild(t);
+    document.getElementById("visits_list").appendChild(e);
+}
+
+
+function fillWynik(obiekt) {
+    document.getElementById('wynikBadania').setAttribute('data-key', obiekt.getAttribute('data-key'))
+
+    var index = obiekt.getAttribute('data-id');
+    document.getElementById('check_name_').innerText = listaWizyt[index].nazwa_badania;
+    document.getElementById('place_').innerText = listaWizyt[index].placowka;
+    document.getElementById('check_date_').innerText = listaWizyt[index].data;
+    document.getElementById('doctor_').innerText = listaWizyt[index].lekarz;
+    document.getElementById('info_').innerText = listaWizyt[index].informacje;
+
+
+    document.getElementById('result').value = listaWizyt[index].wynik;
+    document.getElementById('medicines').value = listaWizyt[index].leki;
+    document.getElementById('cost').value = listaWizyt[index].koszt;
+}
+function updateWynikBadania() {
+    var key = document.getElementById('wynikBadania').getAttribute('data-key');
+    firebase.database().ref('visits/' + user.uid).child(key).update({
+        wynik: document.getElementById('result').value,
+        leki: document.getElementById('medicines').value,
+        koszt: document.getElementById('cost').value
+    });
+
+    refreshData();
+}
+
+function refreshData() {
+    listaWizyt = [];
+    document.getElementById('visits_list').innerHTML = '';
+    getVisits(listaWizyt);
 }
 
 ///////////////////////////////////////////////////////////////////////////

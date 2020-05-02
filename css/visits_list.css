@@ -1,0 +1,44 @@
+
+
+.visits {
+  position: relative;
+  margin: auto 2em;
+  max-width: 1140px;
+}
+
+.list--title {
+  margin: 50px 0 25px;
+  padding-bottom: 5px;
+  font-size: 20px;
+  font-weight: 700;
+  border-bottom: 2px solid;
+}
+
+.list {
+  counter-reset: list;
+  list-style: none;
+  padding: 0;
+}
+
+.list--item {
+  counter-increment: list;
+  position: relative;
+  padding-left: 1.4em;
+  font-size: 22px;
+}
+
+.list--item::before {
+  content: counter(list);
+  position: absolute;
+  top: 0.4em;
+  left: 0;
+  width: 2em;
+  height: 2em;
+  border-radius: 50%;
+  font-size: 0.4em;
+  font-weight: 700;
+  line-height: 2em;
+  text-align: center;
+  color: #141414;
+  background-color: #fff;
+}

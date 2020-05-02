@@ -7,6 +7,7 @@
   <title>Interaktywna karta medyczna</title>
   <link rel="stylesheet" type="text/css" href="css/main.css" />
   <link rel="stylesheet" type="text/css" href="css/login.css" />
+  <link rel="stylesheet" type="text/css" href="css/visits_list.css" />
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <meta name="google-signin-client_id"
     content="862214234748-o3as09k1usflenuod97ir2hff8pfnig3.apps.googleusercontent.com">
@@ -17,15 +18,19 @@
   <script src="https://apis.google.com/js/platform.js" async defer></script>
   <link href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-app.js"></script>
+
+  <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase.js"></script>
+  <!-- <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-app.js"></script>
   <script defer src="https://www.gstatic.com/firebasejs/7.14.1/firebase-auth.js"></script>
   <script defer src="https://www.gstatic.com/firebasejs/7.14.1/firebase-firestore.js"></script>
-  <script defer src="https://www.gstatic.com/firebasejs/7.14.1/firebase-database.js"></script>
+  <script defer src="https://www.gstatic.com/firebasejs/7.14.1/firebase-database.js"></script> -->
+
   <script src="js/firebaseauth.js"></script>
   <script src="js/toggle.js"></script>
   <script src="js/index.js"></script>
   <script src="js/maps.js"></script>
   <script src="js/googlesignin.js"></script>
+
 
 </head>
 
@@ -113,7 +118,7 @@
           <label for="check_date">Termin</label>
           <input type="text" name="check_date" placeholder="Data" id="check_date">
           <label for="check_date">Lekarz</label>
-          <input type="text" name="doctor" placeholder="Liekarz" id="doctor">
+          <input type="text" name="doctor" placeholder="Lekarz" id="doctor">
           <label for="check_date">Dodatkowa informacja</label>
           <input type="text" name="info" placeholder="Informacja" id="info">
           <input class="button" id="add_visit_button" type="button" onclick="writeVisitData()" name="add_visit"
@@ -121,8 +126,42 @@
         </form>
       </div>
       <div class="map_col-2" id="map"></div>
+
+      <div class="visits" id="visits">
+        <h1 class="list--title">Zapisane badania:</h1>
+        <ul class="list" id="visits_list"></ul>
+      </div>
+
+      <div id="wynikBadania" style="display: none;">
+        <form action="post" method="post">
+          <label for="">Nazwa badania:</label>
+          <p id="check_name_"></p>
+          <label for="">Placowka:</label>
+          <p id="place_"></p>
+          <label for="">Data:</label>
+          <p id="check_date_"></p>
+          <label for="">Lekarz:</label>
+          <p id="doctor_"></p>
+          <label for="">Dodatkowe informacje:</label>
+          <p id="info_"></p>
+
+          <label>Opisowy wynik badania</input><br>
+            <textarea name="result" id="result" cols="30" rows="3"></textarea><br>
+            <label>Lekarstwa</label><br>
+            <textarea name="medicines" id="medicines" cols="30" rows="3"></textarea><br>
+            <label>Koszt badania:</label>
+            <input type="number" id="cost"><br>
+            <input class="button" id="updateResult" type="button" onclick="updateWynikBadania()" value="AKTUALIZUJ" />
+        </form>
+      </div>
+
+      <div>
+
+        <div class="calendar_col-2">
+
+        </div>
+      </div>
     </div>
-  </div>
 </body>
 
 </html>

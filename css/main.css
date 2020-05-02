@@ -233,3 +233,9 @@ a:hover {
     text-align: center;
     position: relative;
 }
+
+p{
+    line-height: 0px;
+    margin-top: 0px; 
+    margin-bottom: 0px; 
+}
