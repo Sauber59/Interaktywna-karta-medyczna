@@ -8,7 +8,7 @@ function initMap() {
 
   }
 
-function asd() {
+function listPlace() {
     var krakow  = {lat: 50.064021, lng: 19.942638};
     var rydygiera = { lat: 50.092659, lng: 20.019789 };
     var zeromskiego = { lat: 50.065851, lng: 20.046635 };
