@@ -22,11 +22,13 @@ function onSuccess(googleUser) {
     var x = document.getElementById("index_page");
     var y = document.getElementById("login_page");
     var profile = googleUser.getBasicProfile();
+    var gmail = profile.getEmail();
     console.log('Image URL: ' + profile.getImageUrl());
-    console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+    console.log('Email: ' + profile.getEmail());
     alert("Zalogowano");
     x.style.display = "block";
     y.style.display = "none";
+    document.getElementById("uzytkownik").innerHTML = "Uzytkownik: " + gmail;
   }
 
 
