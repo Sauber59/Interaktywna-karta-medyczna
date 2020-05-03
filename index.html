@@ -24,13 +24,10 @@
   <script src="js/toggle.js"></script>
   <script src="js/index.js"></script>
   <script src="js/maps.js"></script>
-  <script src="js/googlesignin.js"></script>
-
 
 </head>
 
-<body onunload="signOut()">
-
+<body>
   <div id="app">
     <div class="login_page" id="login_page">
       <div class="title_login">
@@ -116,7 +113,10 @@
           </form>
         </div>
         <div class="map_col-2" id="map"></div>
+      </div>
 
+      
+      <div class="result" id="result">
         <div class="visits" id="visits">
           <h1 class="list--title">Zapisane badania:</h1>
           <ul class="list" id="visits_list">
@@ -126,8 +126,8 @@
             </li>
           </ul>
         </div>
-
-        <div id="wynikBadania" style="display: none;">
+      
+        <div class="wynikBadania" id="wynikBadania">
           <form action="post" method="post">
             <label for="">Nazwa badania:</label>
             <p id="check_name_"></p>
@@ -149,16 +149,15 @@
             <input class="button" id="updateResult" type="button" v-on:click="updateWynikBadania" value="AKTUALIZUJ" />
           </form>
         </div>
-
-        <div>
-          <div class="calendar_col-2">
-          </div>
-        </div>
       </div>
-    </div>
   </div>
+</div>
 
-  <script src="js/firebaseauth.js"></script>
+
+<script src="js/firebaseauth.js"></script>
+<script src="js/googlesignin.js"></script>
+
+
 
 </body>
 

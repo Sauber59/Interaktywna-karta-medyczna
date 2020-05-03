@@ -1,4 +1,12 @@
-
+function signOut() {
+    var auth2 = gapi.auth2.getAuthInstance();
+    console.log('User signed out.');
+    var x = document.getElementById("index_page");
+    var y = document.getElementById("login_page");
+    x.style.display = "none";
+    y.style.display = "block";
+    alert("Wylogowano");
+}
 
 var app = new Vue({
     el: '#app',
