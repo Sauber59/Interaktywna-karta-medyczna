@@ -20,12 +20,7 @@
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
   <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase.js"></script>
-  <!-- <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-app.js"></script>
-  <script defer src="https://www.gstatic.com/firebasejs/7.14.1/firebase-auth.js"></script>
-  <script defer src="https://www.gstatic.com/firebasejs/7.14.1/firebase-firestore.js"></script>
-  <script defer src="https://www.gstatic.com/firebasejs/7.14.1/firebase-database.js"></script> -->
 
-  <script src="js/firebaseauth.js"></script>
   <script src="js/toggle.js"></script>
   <script src="js/index.js"></script>
   <script src="js/maps.js"></script>
@@ -35,133 +30,136 @@
 </head>
 
 <body onunload="signOut()">
-  <div class="login_page" id="login_page">
-    <div class="title_login">
-      <h1>Login - Medical Card</h1>
-    </div>
 
-    <div class="login" id="app">
-      <div class="form">
-        <form class="reg-form" method="POST" name="reg-form" id="reg-form">
-          <input type="text" name="name" placeholder="Name" id="name" />
-          <input type="password" name="password" placeholder="Password" id="password" />
-          <input type="password" name="repassword" placeholder="Repeat your password" id="repassword"
-            v-model="password" />
-          <input type="email" name="email" placeholder="E-mail" id="email" v-model="email" />
-          <select>
-            <option name="state" id="male" value="Male">Male</option>
-            <option name="state" id="female" value="Male">Female</option>
-          </select>
-          <input class="button" type="button" name="submit" onclick="register(document.getElementById('reg-form'))"
-            value="Register" />
-          <!-- <input class="button" type="button" name="submit" v-on:click="register()" value="Register" /> MIALO BYC DO VUE -->
-
-          <p class="message">Already Registered? <a id="reg_toggle" href="#">Login</a></p>
-        </form>
-
-        <form class="login-form" name="login-form" id="login-form">
-          <input type="email" name="login_email" placeholder="E-mail" id="login_email">
-          <input type="password" name="login_password" placeholder="Password" id="login_password">
-          <input class="button" id="login_button" type="button" onclick="login()" name="submit" value="Login" />
-          <!-- <input class="button" type="button" v-on:click="signIn()" name="submit" value="Login" />   MIALO BYC DO VUE-->
-          <p class="message">Not Registered? <a id="login_toggle" href="#">Register</a></p>
-        </form>
-        <div id="my-signin2" class="g-signin2" data-onsuccess="onSignIn" data-longtitle="true"></div>
-      </div>
-    </div>
-  </div>
-  </div>
-  </div>
-
-
-
-  <div class="index_page" id="index_page">
-    <div class="header">
-      <div class="logo">
-        <h1>Interaktywna Karta Medyczna</h2>
-      </div>
-      <div class="menu">
-        <div id="uzytkownik">Nazwa uzytkownika</div>
-        <ul>
-          <li><a href="profile.html">Mój Profil</a></li>
-          <li><a href="#">Znajdż placówkę</a></li>
-          <li><a class="log_off" id="log_off" onclick="signOut()" href="#">Wyloguj się</a></li>
-          <li><a class="alert" href="https://coronavirus.jhu.edu/map.html">COVID-19</a></li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-2"><span><a id="book_toggle" href="#">Zapisać się na badanie</a></span></div>
-      <div class="col-2"><span><a id="result_toggle" href="#">Dodać wyniki badania</a></span></div>
-    </div>
-
-
-    <div class="book">
-      <div class="book_form_col-2" id="book-form_col-2">
-        <form class="book-form" method="POST" name="book-form" id="book-form">
-          <label for="place">Wybierz placówkę</label>
-          <select type="text" name="place" placeholder="Placówka" id="place" onchange="listPlace()">
-            <option value="rydygiera">Szpital Specjalistyczny im. Ludwika Rydygiera</option>
-            <option value="zeromskiego">Szpital Specjalistyczny im. Stefana Żeromskiego SP ZOZ</option>
-            <option value="rafal">Szpital Sw. Rafala</option>
-            <option value="uniwer">SP ZOZ Szpital Uniwersytecki</option>
-            <option value="ludwik">Wojewódzki Specjalistyczny Szpital Dziecięcy im. św. Ludwika</option>
-            <option value="dietla">Szpital Specjalistyczny im. Józefa Dietla</option>
-            <option value="narutowicza">Szpital Miejski Specjalistyczny im. G. Narutowicza</option>
-            <option value="paul">Krakowski Szpital Specjalistyczny im. Jana Pawła II</option>
-            <option value="milit">5 Wojskowy Szpital Kliniczny z Polikliniką SPZOZ</option>
-            <option value="grandego">Szpital Zakonu Bonifratrów Św. Jana Grandego</option>
-          </select>
-          <label for="check_name">Nazwa badania</label>
-          <input type="text" name="check_name" placeholder="Badanie" id="check_name">
-          <label for="check_date">Termin</label>
-          <input type="text" name="check_date" placeholder="Data" id="check_date">
-          <label for="check_date">Lekarz</label>
-          <input type="text" name="doctor" placeholder="Lekarz" id="doctor">
-          <label for="check_date">Dodatkowa informacja</label>
-          <input type="text" name="info" placeholder="Informacja" id="info">
-          <input class="button" id="add_visit_button" type="button" onclick="writeVisitData()" name="add_visit"
-            value="Zapisz" style="align-content: center; margin-top: 15px;" />
-        </form>
-      </div>
-      <div class="map_col-2" id="map"></div>
-
-      <div class="visits" id="visits">
-        <h1 class="list--title">Zapisane badania:</h1>
-        <ul class="list" id="visits_list"></ul>
+  <div id="app">
+    <div class="login_page" id="login_page">
+      <div class="title_login">
+        <h1>Login - Medical Card</h1>
       </div>
 
-      <div id="wynikBadania" style="display: none;">
-        <form action="post" method="post">
-          <label for="">Nazwa badania:</label>
-          <p id="check_name_"></p>
-          <label for="">Placowka:</label>
-          <p id="place_"></p>
-          <label for="">Data:</label>
-          <p id="check_date_"></p>
-          <label for="">Lekarz:</label>
-          <p id="doctor_"></p>
-          <label for="">Dodatkowe informacje:</label>
-          <p id="info_"></p>
+      <div class="login">
+        <div class="form">
+          <form class="reg-form" method="POST" name="reg-form" id="reg-form" :v-model="formName">
+            <input type="text" name="name" placeholder="Name" id="name" />
+            <input type="password" name="password" placeholder="Password" id="password" />
+            <input type="password" name="repassword" placeholder="Repeat your password" id="repassword"
+              v-model="password" />
+            <input type="email" name="email" placeholder="E-mail" id="email" v-model="email" />
+            <select>
+              <option name="state" id="male" value="Male">Male</option>
+              <option name="state" id="female" value="Male">Female</option>
+            </select>
+            <input class="button" type="button" name="submit" v-on:click="register" value="Register" />
 
-          <label>Opisowy wynik badania</input><br>
-            <textarea name="result" id="result" cols="30" rows="3"></textarea><br>
-            <label>Lekarstwa</label><br>
-            <textarea name="medicines" id="medicines" cols="30" rows="3"></textarea><br>
-            <label>Koszt badania:</label>
-            <input type="number" id="cost"><br>
-            <input class="button" id="updateResult" type="button" onclick="updateWynikBadania()" value="AKTUALIZUJ" />
-        </form>
-      </div>
+            <p class="message">Already Registered? <a id="reg_toggle" href="#">Login</a></p>
+          </form>
 
-      <div>
-
-        <div class="calendar_col-2">
-
+          <form class="login-form" name="login-form" id="login-form">
+            <input type="email" name="login_email" placeholder="E-mail" id="login_email">
+            <input type="password" name="login_password" placeholder="Password" id="login_password">
+            <input class="button" id="login_button" type="button" v-on:click="login" name="submit" value="Login" />
+            <p class="message">Not Registered? <a id="login_toggle" href="#">Register</a></p>
+          </form>
+          <div id="my-signin2" class="g-signin2" data-onsuccess="onSignIn" data-longtitle="true"></div>
         </div>
       </div>
     </div>
+
+    <div class="index_page" id="index_page">
+      <div class="header">
+        <div class="logo">
+          <h1>Interaktywna Karta Medyczna</h2>
+        </div>
+        <div class="menu">
+          <div id="uzytkownik">Nazwa uzytkownika</div>
+          <ul>
+            <li><a href="profile.html">Mój Profil</a></li>
+            <li><a href="#">Znajdż placówkę</a></li>
+            <li><a class="log_off" id="log_off" onclick="signOut()" href="#">Wyloguj się</a></li>
+            <li><a class="alert" href="https://coronavirus.jhu.edu/map.html">COVID-19</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-2"><span><a id="book_toggle" href="#">Zapisać się na badanie</a></span></div>
+        <div class="col-2"><span><a id="result_toggle" href="#">Dodać wyniki badania</a></span></div>
+      </div>
+
+
+      <div class="book">
+        <div class="book_form_col-2" id="book-form_col-2">
+          <form class="book-form" method="POST" name="book-form" id="book-form">
+            <label for="place">Wybierz placówkę</label>
+            <select type="text" name="place" placeholder="Placówka" id="place" onchange="listPlace()">
+              <option value="rydygiera">Szpital Specjalistyczny im. Ludwika Rydygiera</option>
+              <option value="zeromskiego">Szpital Specjalistyczny im. Stefana Żeromskiego SP ZOZ</option>
+              <option value="rafal">Szpital Sw. Rafala</option>
+              <option value="uniwer">SP ZOZ Szpital Uniwersytecki</option>
+              <option value="ludwik">Wojewódzki Specjalistyczny Szpital Dziecięcy im. św. Ludwika</option>
+              <option value="dietla">Szpital Specjalistyczny im. Józefa Dietla</option>
+              <option value="narutowicza">Szpital Miejski Specjalistyczny im. G. Narutowicza</option>
+              <option value="paul">Krakowski Szpital Specjalistyczny im. Jana Pawła II</option>
+              <option value="milit">5 Wojskowy Szpital Kliniczny z Polikliniką SPZOZ</option>
+              <option value="grandego">Szpital Zakonu Bonifratrów Św. Jana Grandego</option>
+            </select>
+            <label for="check_name">Nazwa badania</label>
+            <input type="text" name="check_name" placeholder="Badanie" id="check_name">
+            <label for="check_date">Termin</label>
+            <input type="text" name="check_date" placeholder="Data" id="check_date">
+            <label for="check_date">Lekarz</label>
+            <input type="text" name="doctor" placeholder="Lekarz" id="doctor">
+            <label for="check_date">Dodatkowa informacja</label>
+            <input type="text" name="info" placeholder="Informacja" id="info">
+            <input class="button" id="add_visit_button" type="button" v-on:click="writeVisitData()" name="add_visit"
+              value="Zapisz" style="align-content: center; margin-top: 15px;" />
+          </form>
+        </div>
+        <div class="map_col-2" id="map"></div>
+
+        <div class="visits" id="visits">
+          <h1 class="list--title">Zapisane badania:</h1>
+          <ul class="list" id="visits_list">
+            <li v-for="(value,index) in listaWizyt" class="list--item" id="list_item" :data-id="index"
+              :data-key="value.key" v-on:click='fillWynik(value)'>
+              {{ value.data }} : {{value.nazwa_badania}}
+            </li>
+          </ul>
+        </div>
+
+        <div id="wynikBadania" style="display: none;">
+          <form action="post" method="post">
+            <label for="">Nazwa badania:</label>
+            <p id="check_name_"></p>
+            <label for="">Placowka:</label>
+            <p id="place_"></p>
+            <label for="">Data:</label>
+            <p id="check_date_"></p>
+            <label for="">Lekarz:</label>
+            <p id="doctor_"></p>
+            <label for="">Dodatkowe informacje:</label>
+            <p id="info_"></p>
+
+            <label>Opisowy wynik badania</label><br>
+            <textarea name="result" id="result" cols="50" rows="3"></textarea><br>
+            <label>Lekarstwa</label><br>
+            <textarea name="medicines" id="medicines" cols="50" rows="3"></textarea><br>
+            <label>Koszt badania:</label>
+            <input type="number" id="cost"><br>
+            <input class="button" id="updateResult" type="button" v-on:click="updateWynikBadania" value="AKTUALIZUJ" />
+          </form>
+        </div>
+
+        <div>
+          <div class="calendar_col-2">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/firebaseauth.js"></script>
+
 </body>
 
 </html>
