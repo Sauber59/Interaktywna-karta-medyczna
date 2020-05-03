@@ -12,6 +12,7 @@ body {
     -webkit-overflow-scrolling: touch;
 }
 
+
 .header {
     width: auto;
     height: auto;
@@ -167,6 +168,7 @@ a:hover {
    }
 
 .result {
+    font-family: "Roboto", sans-serif;
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
@@ -174,41 +176,41 @@ a:hover {
     justify-content: space-between;
 }
 
-.result_form_col-2 {
+
+.wynikBadania {
     width: 50%;
-    margin: 15px;
-    text-align: center;
+    margin: 5px;
     position: relative;
     display: none;
 }
 
 
-.result input {
+.wynikBadania input {
     font-family: "Roboto", sans-serif;
     outline: 1;
     background: #f2f2f2;
     border: 1;
-    margin: 5px 15px 5px;
-    padding: 15px;
+    margin: 5px 5px 5px;
+    padding: 5px;
     box-sizing: border-box;
     font-size: 14px;
     display: flex;
-    width: 100%;
+    width: 90%;
 }
 
-.result select {
+.wynikBadania textarea {
     font-family: "Roboto", sans-serif;
     outline: 1;
     background: #f2f2f2;
-    border: 1;
-    margin: 5px 15px 5px;
-    padding: 15px;
+    padding: 20px;
     box-sizing: border-box;
     font-size: 14px;
     display: flex;
-    width: 100%;
+    width: 90%;
 }
-.result label {
+
+.wynikBadania label {
+    position: relative;
     font-family: "Roboto", sans-serif;
     color: rgb(214, 219, 230);
     padding: 15px;
@@ -216,26 +218,13 @@ a:hover {
     display: flex;
 }
 
-.result option {
+.wynikBadania p {
     font-family: "Roboto", sans-serif;
-    border: 5;
-    margin: 15px 0px 15px;
-    padding: 30px;
-    box-sizing: border-box;
-    font-size: 16px;
+    color: rgba(11, 17, 31);
+    padding: 5px;
+    font-size: 18px;
     display: flex;
-    width: 100%;
-}
-
-.result_map {
-    width: 90%;
-    margin: 15px;
-    text-align: center;
-    position: relative;
-}
-
-p{
-    line-height: 0px;
+    line-height: 5px;
     margin-top: 0px; 
     margin-bottom: 0px; 
 }
